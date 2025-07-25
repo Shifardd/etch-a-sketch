@@ -9,7 +9,7 @@ container.style.cssText = `display:flex; flex-wrap: wrap;
 
 changeGrid.addEventListener('click', () => {
   value = +prompt('Enter a Number to change no. of squares per side:', 16);
-  if (value > 100 || value <= 0 || typeof value != 'number') {
+  if (value > 100 || value <= 0 || !Number.isFinite(value)) {
     alert('ERROR! Enter from 1 - 100');
   } else {
     container.textContent = '';
