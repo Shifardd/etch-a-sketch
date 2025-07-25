@@ -1,5 +1,7 @@
 const container = document.querySelector('.container');
 const changeGrid = document.querySelector('.change');
+const resetColor = document.querySelector('.reset');
+const changeColor = document.querySelector('input');
 
 let size = 960;
 let value = 16;
@@ -15,7 +17,12 @@ changeGrid.addEventListener('click', () => {
     container.textContent = '';
     createGrid(value);
   }
-})
+});
+
+resetColor.addEventListener('click', ()=> {
+    container.textContent = '';
+    createGrid(value);
+});
 
 function createGrid(value) {
   for(let i = 0; i < value * value; i++) {
@@ -26,10 +33,16 @@ function createGrid(value) {
 
     container.appendChild(gridBox);
 
+    let color = 'black';
+
+    changeColor.addEventListener('input', ()=> {
+      color = changeColor.value;
+    });
+
     gridBox.addEventListener('mouseenter', (e) => {
-      e.target.style.backgroundColor = 'black';
-    })
+      e.target.style.backgroundColor = `${color}`;
+    });
   };
 }
 
-createGrid(value)
+createGrid(value);
