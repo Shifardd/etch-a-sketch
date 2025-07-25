@@ -1,24 +1,35 @@
 const container = document.querySelector('.container');
+const changeGrid = document.querySelector('.change');
 
 let size = 960;
-let value = 16
+let value = 16;
 
-container.style.cssText = `display:flex; 
-                      flex-wrap: wrap; 
-                      width: ${size}px; 
-                      height: ${size}px;`
+container.style.cssText = `display:flex; flex-wrap: wrap; 
+          width: ${size}px; height: ${size}px;`;
 
-for(let i = 0; i < value * value; i++) {
-  let gridBox = document.createElement('div');
-  gridBox.style.cssText = `height: ${size / value - 2}px; 
-                      width: ${size / value - 2}px; 
-                      border: 1px solid black;`
+changeGrid.addEventListener('click', () => {
+  value = +prompt('Enter a Number to change no. of squares per side:', 16);
+  if (value > 100 || value <= 0 || typeof value != 'number') {
+    alert('ERROR! Enter from 1 - 100');
+  } else {
+    container.textContent = '';
+    createGrid(value);
+  }
+})
 
-  container.appendChild(gridBox);
+function createGrid(value) {
+  for(let i = 0; i < value * value; i++) {
+    let gridBox = document.createElement('div');
+    gridBox.style.cssText = `height: ${size / value - 2}px; 
+                        width: ${size / value - 2}px; 
+                        border: 1px solid black;`;
 
-  gridBox.addEventListener('mouseenter', (e) => {
-    e.target.style.backgroundColor = 'black';
-  })
+    container.appendChild(gridBox);
+
+    gridBox.addEventListener('mouseenter', (e) => {
+      e.target.style.backgroundColor = 'black';
+    })
+  };
 }
 
-
+createGrid(value)
