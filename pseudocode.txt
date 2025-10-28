@@ -1,0 +1,5 @@
+1. Have Initial Container (16x16)
+2. When hovering box, add background color to the target boxes
+3. User can change grid by clicking `Change Grid` button
+4. User can reset color by clicking `Reset Color` button
+5. User can change color by clicking `Change Color` input
