@@ -1,5 +1,27 @@
-1. Have Initial Container (16x16)
-2. When hovering box, add background color to the target boxes
-3. User can change grid by clicking `Change Grid` button
-4. User can reset color by clicking `Reset Color` button
-5. User can change color by clicking `Change Color` input
+INITIALIZE initialGrid = 16
+INITIALIZE initialColor = "black"
+
+FUNCTION createGrid(size):
+  1. CALCULATE squareSize = 960 / size
+  2. LOOP size * size times:
+       CREATE div
+       SET width/height to squareSize
+       ADD "hover" event listener: 
+         SET background to activeColor
+       APPEND to container
+
+// Event Listeners
+ON CLICK "Change Grid" button:
+  1. PROMPT user for newSize
+  2. IF newSize >= 1 AND newSize <= 100:
+       createGrid(newSize)
+  3. ELSE: 
+       ALERT "Error: Choose 1-100"
+
+ON CLICK "Reset Color" button:
+  1. SELECT all grid squares
+  2. SET background of each to "white"
+
+ON CHANGE "Color Input":
+  1. GET selected color value
+  2. SET activeColor to that value
