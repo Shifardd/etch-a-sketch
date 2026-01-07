@@ -7,6 +7,7 @@ const changeColor = document.querySelector('input');
 // Initial values
 let size = 960;
 let value = 16;
+let color = 'black';
 
 // Style the container
 container.style.cssText = `display:flex; 
@@ -15,13 +16,17 @@ container.style.cssText = `display:flex;
 
 // Event when we clicked the changeGrid button
 changeGrid.addEventListener('click', () => {
+  let tempVal = value; // Create variable to revert to the appropriate prompt input
   value = +prompt('Enter a Number to change no. of squares per side:', 16);
-  if (!Number.isInteger(value)|| value > 100 || value <= 0) {
+
+  if (value > 100 || value <= 0 || !Number.isInteger(value)) {
     Swal.fire({
     icon: "error",
     title: "Oops...",
     text: "ERROR! Enter numerical from 1 - 100",
   });
+    value = tempVal; // Store the appropriate prompt input
+    reCreate(value);
   } else {
     reCreate(value);
   }
@@ -43,20 +48,29 @@ function createGrid(value) {
 
     container.appendChild(gridBox);
 
-    let color = 'black';
-
     // Change Color
     changeColor.addEventListener('input', ()=> {
-      color = changeColor.value;
+      colorChange();
     });
 
     // Hover to change bg-color
     gridBox.addEventListener('mouseenter', (e) => {
-      e.target.style.backgroundColor = `${color}`;
+      changeSquareColor(e);
     });
   };
 }
 
+// Function to change color
+function colorChange() {
+  color = changeColor.value;
+}
+
+// Function to change 
+function changeSquareColor(e) {
+  e.target.style.backgroundColor = `${color}`;
+}
+
+// Function to remove contents of container and recreate new one
 function reCreate (value) {
   container.textContent = '';
   createGrid(value);
